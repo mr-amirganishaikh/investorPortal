@@ -1,0 +1,586 @@
+@import "../../../shared/styles/global";
+
+body.dashboard {
+  background-color: darken($themeGray, 5%);
+}
+
+main.content {
+  position: relative;
+  padding-top: 80px;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+}
+
+header {
+  @extend .bg-themeGray;
+  @extend .depth1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+#header {
+  > li {
+    padding: 0;
+    float: left;
+    min-height: 60px;
+    display: block;
+  }
+  #menu-toggler {
+    width: 18%;
+    text-align: center;
+    padding: 8px 0;
+    a {
+      text-decoration: none;
+      @extend .color-themeDarkBlue;
+    }
+    .icon {
+      display: block;
+    }
+    .text {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    @include mq($from: phone) {
+      width: 15%;
+    }
+    @include mq($from: phablet) {
+      width: 8%;
+    }
+    @include mq($from: tablet-wide) {
+      width: 7%;
+    }
+  }
+  #menu-title {
+    width: 35%;
+    padding: 16px 0 12px;
+    display: none;
+    h1 {
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
+    }
+    i {
+      display: inline-block;
+      width: auto;
+    }
+    @include mq($from: tablet-wide) {
+      width: 30%;
+      display: block;
+    }
+    @include mq($from: desktop) {
+      h1 {
+        font-size: 1.75rem;
+      }
+    }
+  }
+  #menu-addons {
+    width: 82%;
+    text-align: right;
+    .list-menu-addons {
+      > li {
+        margin-left: 0px;
+        float: right;
+        min-height: 60px;
+        display: block;
+        &:last-child {
+          margin-left: 0;
+        }
+      }
+      #menu-quarter {
+        padding: 19px 0px 12px;
+        select {
+          border: 0;
+          background-color: transparent;
+          font-size: 1.1rem;
+          width: 100%;
+          font-weight: bold;
+          cursor: pointer;
+        }
+      }
+      #menu-currency {
+        padding: 19px 0px 12px;
+        font-size: 1rem;
+      }
+      #menu-notification {
+        display: none;
+        width: 46px;
+        padding: 15px 0;
+        text-align: center;
+        a {
+          display: inline-block;
+          @extend .color-themeDarkBlue;
+        }
+      }
+    }
+    @include mq($from: phone) {
+      width: 85%;
+      .list-menu-addons {
+        #menu-quarter {
+          padding: 19px 15px 12px;
+        }
+        #menu-currency {
+          padding: 19px 15px 12px;
+          font-size: 1.1rem;
+        }
+      }
+    }
+    @include mq($from: phablet) {
+      width: 92%;
+    }
+    @include mq($from: tablet) {
+      .list-menu-addons {
+        > li {
+          margin-right: 10px;
+        }
+        #menu-notification {
+          display: block;
+        }
+      }
+    }
+    @include mq($from: tablet-wide) {
+      width: 63%;
+    }
+  }
+}
+
+aside {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  top: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease-in-out;
+  &.slideIn {
+    left: 0;
+    #sidebar {
+      left: 0;
+    }
+  }
+}
+
+#sidebar {
+  width: 80%;
+  height: 100%;
+  position: fixed;
+  left: -100%;
+  top: 0;
+  z-index: 9999;
+  background-color: white;
+  @extend .depth2;
+  transition: all 0.3s ease-in-out;
+  #sidebar-head {
+    padding: 14px 15px;
+    border-bottom: 1px solid $themeDarkGray;
+    .user-details {
+      margin: 0 15px;
+      .img-holder {
+        width: 32px;
+        height: 32px;
+        display: inline-block;
+        vertical-align: middle;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        &.circle-holder {
+          border-radius: 100%;
+        }
+        &.square-holder {
+          border-radius: 3px;
+        }
+      }
+      .title-profile {
+        display: inline-block;
+        margin: 0 10px;
+        vertical-align: middle;
+        font-size: 1.25rem;
+        font-weight: bold;
+        @extend .color-themeBlue;
+      }
+    }
+  }
+  #sidebar-body {
+    .main-nav {
+      padding: 15px;
+      ul {
+        > li {
+          a {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            &.active {
+              @extend .color-themeDarkBlue;
+            }
+            i,
+            .material-icons {
+              margin-right: 10px;
+            }
+            span {
+              font-size: 1.25rem;
+              display: inline-block;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include mq($from: phone-wide) {
+    width: 50%;
+  }
+  @include mq($from: tablet) {
+    width: 40%;
+  }
+  @include mq($from: tablet-wide) {
+    width: 30%;
+  }
+  @include mq($from: desktop) {
+    width: 25%;
+  }
+  @include mq($from: desktop-wide) {
+    width: 20%;
+  }
+  @include mq($from: huge-screen) {
+    width: 15%;
+  }
+}
+
+.table-theme {
+  border: 0;
+  margin-bottom: 0 !important;
+  &.no-footer.dataTable {
+    border: 0;
+  }
+  thead,
+  tbody,
+  tfoot {
+    tr {
+      td,
+      th {
+        border: 0;
+        height: 25px;
+        vertical-align: middle;
+        border-right: 1px solid darken($themeDarkGray, 15%);
+        padding: 8px 6px;
+        @include mq($from: desktop) {
+          padding: 10px 18px;
+        }
+        &:last-child {
+          border-right: 0;
+        }
+      }
+    }
+  }
+
+  thead {
+    tr {
+      td,
+      th {
+        @extend .bg-themeBlue;
+        color: $white;
+      }
+    }
+  }
+  tbody {
+    tr {
+      &.odd {
+        td,
+        th {
+          background-color: lighten($themeBlue, 20%);
+        }
+      }
+      &.even {
+        td,
+        th {
+          background-color: $white;
+        }
+      }
+    }
+  }
+  tfoot {
+    tr {
+      td,
+      th {
+        border-top: 1px solid darken($themeDarkGray, 15%);
+        background-color: lighten($themeBlue, 20%);
+        border-right: 0;
+      }
+    }
+  }
+}
+
+.theme-card {
+  margin-bottom: 45px;
+  .card-head {
+    .card-title {
+      font-size: 1.75rem;
+      margin-bottom: 10px;
+      margin-left: 15px;
+    }
+  }
+  .card-body {
+    background-color: $white;
+    border-radius: 3px;
+    padding: 15px;
+    @extend .depth1;
+  }
+  .card-action {
+    text-align: right;
+    padding: 5px 0;
+    a {
+      display: inline-block;
+      &.view-link {
+        span {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+.card-status-grid {
+  ul {
+    &.investment-overview-tabs {
+      li {
+        width: 20%;
+        padding: 10px;
+        padding-top: 25px;
+        height: 70px;
+        a {
+          @extend .color-themeDarkGray;
+          transition: all 0.1s linear;
+        }
+        &.active {
+          width: 40%;
+          padding-top: 10px;
+          @extend .bg-themeBlue;
+          color: $white;
+          a {
+            color: $white !important;
+          }
+          .status-title {
+            transform: rotate(0deg);
+            word-spacing: 0;
+          }
+          .status-count {
+            transform: scale(1);
+          }
+        }
+        &:hover,
+        &:focus {
+          background-color: lighten($themeBlue, 15%);
+          a {
+            cursor: pointer;
+            @extend .bg-themeBlue;
+            color: $white !important;
+          }
+        }
+        .status-title {
+          transform: rotate(90deg);
+          word-spacing: 100vw;
+          transition: all 0.3s linear;
+        }
+        .status-count {
+          transform: scale(0);
+          font-size: 1.5rem;
+          transition: all 0.3s linear;
+        }
+
+        @include mq($from: tablet, $to: tablet-wide) {
+          width: 25%;
+          padding-left: 30px;
+          padding-top: 15px;
+          height: auto;
+          &.active {
+            width: 25%;
+            padding-top: 15px;
+          }
+          .status-title {
+            transform: rotate(0deg);
+            word-spacing: 0;
+          }
+          .status-count {
+            font-size: 2.25rem;
+            transform: scale(1);
+          }
+        }
+
+        @include mq($from: tablet-wide, $to: desktop) {
+          padding-top: 40px;
+          height: 85px;
+        }
+
+        @include mq($from: desktop) {
+          width: 25%;
+          padding-left: 30px;
+          padding-top: 15px;
+          height: auto;
+          &.active {
+            width: 25%;
+            padding-top: 15px;
+          }
+          .status-title {
+            transform: rotate(0deg);
+            word-spacing: 0;
+          }
+          .status-count {
+            font-size: 2.25rem;
+            transform: scale(1);
+          }
+        }
+      }
+    }
+    li {
+      background-color: $white;
+      @extend .color-themeDarkGray;
+      float: left;
+      width: 25%;
+      padding: 15px;
+      transition: all 0.3s linear;
+      .status-title {
+        font-size: 1rem;
+        margin-bottom: 0.5em;
+      }
+      .status-count {
+        font-size: 2.25rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.form-theme {
+  border: 0;
+  height: 37px;
+  outline: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background-color: transparent;
+  @extend .color-themeDarkGray;
+  border-bottom: 1px solid $themeDarkGray;
+  &:focus {
+    box-shadow: none;
+    border-color: $themeDarkGray;
+  }
+}
+
+.input-group-theme {
+  .input-group-prepend {
+    background-color: transparent;
+    @extend .color-themeDarkBlue;
+    box-shadow: none;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid $themeDarkGray;
+    padding-right: 5px;
+    i {
+      font-size: 1.5rem;
+    }
+    .form-theme {
+      padding-left: 5px;
+    }
+  }
+}
+
+.document-summary-grid {
+  li {
+    float: left;
+    width: 100%;
+    text-align: center;
+    @extend .color-themeDarkGray;
+    margin-bottom: 20px;
+    .grid-num {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+      &.total-docs {
+        color: $info;
+      }
+      &.expired-docs {
+        color: $danger;
+      }
+    }
+    .grid-date {
+      @extend .grid-num;
+      font-size: 2rem;
+    }
+  }
+  @include mq($from: phone-wide) {
+    padding: 15px 0;
+    li {
+      width: 25%;
+      margin-bottom: 0px;
+      &.grid-date {
+        width: 50%;
+      }
+      .grid-num {
+        min-height: 45px;
+      }
+    }
+  }
+}
+
+.document-grid {
+  @extend .bg-themeGray;
+  color: darken($themeDarkGray, 30%);
+  padding: 10px;
+  margin-bottom: 15px;
+  &.isexpired {
+    background-color: lighten($danger, 25%) !important;
+  }
+  .document-icon {
+    margin-bottom: 10px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    &.icon-pdf {
+      background-image: url("../../../shared/images/document-icons/pdf.png");
+      width: 31px;
+      height: 40px;
+    }
+    &.icon-doc {
+      background-image: url("../../../shared/images/document-icons/doc.png");
+      width: 29px;
+      height: 37px;
+    }
+    &.icon-xlsx {
+      background-image: url("../../../shared/images/document-icons/xlsx.png");
+      width: 30px;
+      height: 39px;
+    }
+    &.icon-pptx {
+      background-image: url("../../../shared/images/document-icons/pptx.png");
+      width: 30px;
+      height: 39px;
+    }
+  }
+  .document-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    @include truncate(100%);
+  }
+  .document-dates {
+    margin-bottom: 10px;
+  }
+  .document-description {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+}
+
+.data-room-grid {
+  @extend .document-grid;
+}

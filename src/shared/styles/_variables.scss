@@ -1,0 +1,31 @@
+// colors
+$white: white;
+$black: black;
+$danger: #f54a5d;
+$warning: #daa703;
+$success: #7aa63a;
+$info: #2aa0e8;
+$themeBlue: #78b0e5;
+$themeDarkBlue: #203864;
+$themeGray: #ededed;
+$themeDarkGray: #a09f9c;
+
+// themecolors
+$themeColors: (
+  "Blue": $themeBlue,
+  "DarkBlue": $themeDarkBlue,
+  "Gray": $themeGray,
+  "DarkGray": $themeDarkGray
+);
+// generate background-color and color css as per themecolors
+@each $name, $value in $themeColors {
+  .color-theme#{$name} {
+    color: #{$value} !important;
+  }
+  .bg-theme#{$name} {
+    background-color: #{$value} !important;
+  }
+}
+
+// fonts
+$font-openSans: "Open Sans", sans-serif;

@@ -1,0 +1,55 @@
+@import "./variables", "./mixins";
+
+html {
+  font-size: 12px;
+  @include mq($from: phablet) {
+    font-size: 13px;
+  }
+  @include mq($from: tablet-wide) {
+    font-size: 14px;
+  }
+  @include mq($from: desktop-wide) {
+    font-size: 15px;
+  }
+  @include mq($from: huge-screen) {
+    font-size: 16px;
+  }
+}
+
+body {
+  font-size: 1rem;
+  color: $black;
+  background-color: $white;
+  font-family: $font-openSans !important;
+}
+
+.depth1 {
+  box-shadow: 0 2px 5px 0 rgba($black, 0.16), 0 2px 10px 0 rgba($black, 0.12);
+}
+.depth2 {
+  box-shadow: 0 8px 17px 0 rgba($black, 0.2), 0 6px 20px 0 rgba($black, 0.19);
+}
+.material-icons {
+  vertical-align: middle;
+}
+
+ol,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+}
+
+a {
+  text-decoration: none;
+  @extend .color-themeDarkGray;
+  transition: all 0.35s linear;
+  cursor: pointer;
+  &:hover {
+    @extend .color-themeDarkBlue;
+  }
+}

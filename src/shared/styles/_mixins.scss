@@ -1,0 +1,100 @@
+// Breakpoints
+$breakpoints: (
+  phone: 400px,
+  phone-wide: 480px,
+  phablet: 560px,
+  tablet-small: 640px,
+  tablet: 768px,
+  tablet-wide: 1024px,
+  desktop: 1248px,
+  desktop-wide: 1440px,
+  huge-screen: 1680px,
+  huge-screen-wide: 2560px
+) !default;
+
+// media query mixin
+@mixin mq(
+  $from: false,
+  $to: false,
+  $and: false,
+  $media-feature: width,
+  $media-type: all,
+  $bp: $breakpoints
+) {
+  $min-width: 0;
+  $max-width: 0;
+  $media-query: ""; // From: this breakpoint (inclusive)
+  @if $from {
+    @if type-of($from) ==number {
+      $min-width: $from;
+    } @else {
+      $min-width: map_get($bp, $from);
+    }
+  } // Until: that breakpoint (exclusive)
+  @if $to {
+    @if type-of($to) ==number {
+      $max-width: $to;
+    } @else {
+      // $negative: if($em-media-queries, 0.01em, 1px);
+      $max-width: map_get($bp, $to) - 1px;
+    }
+  }
+  @if $media-feature {
+    @if $min-width !=0 {
+      $media-query: "#{$media-query} and (min-#{$media-feature}: #{$min-width})";
+    }
+    @if $max-width !=0 {
+      $media-query: "#{$media-query} and (max-#{$media-feature}: #{$max-width})";
+    }
+  }
+  @if $and {
+    $media-query: "#{$media-query} and #{$and}";
+  }
+  // Remove unnecessary media query prefix 'all and '
+  @if ($media-type== "all" and $media-query != "") {
+    $media-type: "";
+    $media-query: str-slice(unquote($media-query), 6);
+  }
+  @media #{$media-type + $media-query} {
+    @content;
+  }
+}
+// placeholder mixin
+@mixin placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+// truncate mixin
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+// psuedo mixin
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+// z-index mixin
+$z-index: ();
+@function z-index($key) {
+  @return map-get($z-index, $key);
+}
+@mixin z-index($key) {
+  z-index: z-index($key);
+}
